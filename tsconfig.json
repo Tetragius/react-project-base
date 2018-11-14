@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "jsx": "react",
+        "experimentalDecorators": true
+    },
+    "include": [
+        "./src/ts/**/*"
+    ],
+    "exclude": [
+        "./node_modules",
+        "**/*.test.ts"
+    ]
+}
