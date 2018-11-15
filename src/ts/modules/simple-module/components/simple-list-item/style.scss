@@ -1,5 +1,10 @@
-.simple-component{
-    width: 40px;
-    height: 40px;
-    background-color: gray;
+.simple-list-item{
+    width: 900px;
+    height: 44px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding-left: 24px;
+    box-shadow: 0px 2px 2px 2px #cccccc;
+    position: relative;
 }

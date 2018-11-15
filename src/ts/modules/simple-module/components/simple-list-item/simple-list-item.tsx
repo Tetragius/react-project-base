@@ -16,12 +16,16 @@ export default class SimpleListItem<P, S, T> extends BaseComponent<ISimpleListIt
         super(props);
     }
 
+    onClick(id: string){
+        this.props.onClick && this.props.onClick(id)
+    }
+
     view() {
 
         const item = this.props.item;
 
         return (
-            <div className="simple-list-item" onClick={() => this.props.onClick(item.id)}>{item.title}</div>
+            <div className="simple-list-item" onClick={() => this.onClick(item.id)}>{item.title}</div>
         );
     }
 }

@@ -3,14 +3,15 @@ import ActionTypes from './types';
 import * as _ from 'lodash';
 import IState from '../interfaces/IState';
 import IList from '../interfaces/IList';
+import { ItemType } from '../interfaces/IItem';
 
 const initialState: IState = {
     list: {
         items: [
-            { id: "1", title: "test 1" },
-            { id: "2", title: "test 2" },
-            { id: "3", title: "test 3" },
-            { id: "4", title: "test 4" },
+            { id: "1", title: "test 1", type: ItemType.simple },
+            { id: "2", title: "test 2", type: ItemType.extended },
+            { id: "3", title: "test 3", type: ItemType.expandable, body: 'test test tset test test test test' },
+            { id: "4", title: "test 4", type: ItemType.extendedExpandable },
         ], 
         total: 2}
 };

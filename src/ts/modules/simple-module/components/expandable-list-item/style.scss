@@ -1,0 +1,20 @@
+.expandable-list-item{
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 2px 2px 2px #cccccc;
+    z-index: 0;
+    .expandable-list-item_head{
+        .extended-list-item{
+            box-shadow: none;
+        }
+        .simple-list-item{
+            box-shadow: none;
+            cursor: pointer;
+        }
+    }
+    .expandable-list-item_body{
+        height: 90px;
+        background-color: #fff;
+        padding: 24px;
+    }
+}

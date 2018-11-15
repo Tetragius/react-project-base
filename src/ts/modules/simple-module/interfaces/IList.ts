@@ -1,6 +1,4 @@
-import IItem from "./IItem";
-
 export default interface IList{
-    items: IItem[];
+    items: any[];
     total: number;
 }

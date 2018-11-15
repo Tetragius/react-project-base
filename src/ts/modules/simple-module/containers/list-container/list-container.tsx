@@ -3,7 +3,7 @@ import BaseContainer from '../../../../containers';
 import { withRouter } from 'react-router';
 import './style.scss';
 import IList from '../../interfaces/IList';
-import SimpleListItem from '../../components/simple-list-item';
+import ListService from '../../services/list-service'
 
 interface IListContainerProps {
     list: IList;
@@ -17,13 +17,19 @@ class ListContainer extends BaseContainer<IListContainerProps, IListContainerSta
         super(props, true);
     }
 
-    view(children) {
+    view() {
 
         const items = this.props.list.items;
+        const itemFactory = ListService.itemFactory;
+
+        const defineItem = (item) => {
+            const Component = itemFactory(item);
+            return (<Component key={item.id} item={item} stream={this.stream}/>)
+        }
 
         return (
             <div className="list-container" >
-                {items.map(item => <SimpleListItem key={item.id} item={item} stream={this.stream}/>)}
+                {items.map(item => defineItem(item))}
             </div>
         );
     }
