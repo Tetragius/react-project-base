@@ -29,9 +29,9 @@ class SimpleContainer extends BaseContainer<ISimpleContainerProps, ISimpleContai
                 <FormContainer>
                     <ListContainer list={props.list}/>
                 </FormContainer>
-                <FormContainer>
+                {/* <FormContainer>
                     <ErrorComponent />
-                </FormContainer>
+                </FormContainer> */}
             </div>
         );
     }

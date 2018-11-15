@@ -17,4 +17,12 @@
         background-color: #fff;
         padding: 24px;
     }
+    .simple-footer{
+        background-color: rgb(241, 241, 241);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 30px;
+        border-top: 1px solid #cccccc;
+    }
 }

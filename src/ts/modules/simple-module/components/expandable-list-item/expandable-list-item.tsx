@@ -12,7 +12,7 @@ interface IExpandableListItemState {
     expanded?: boolean;
 }
 
-export default class ExpandableListItem extends ExtendedListItem<IExpandableListItemProps, IExpandableListItemState, IExpandableItem>{
+export default class ExpandableListItem<P, S extends IExpandableListItemState, T = any> extends ExtendedListItem<IExpandableListItemProps & P, IExpandableListItemState & S, IExpandableItem & T>{
     constructor(props) {
         super(props);
     }
@@ -23,11 +23,13 @@ export default class ExpandableListItem extends ExtendedListItem<IExpandableList
         this.setState({expanded: !this.state.expanded});
     }
 
-    view(body?: JSX.Element) {
+    view(footer?: JSX.Element) {
 
         const props = this.props;
         const state = this.state;
         const item = props.item;
+
+        footer = footer || <div className="simple-footer">[---]</div>
 
         return( 
             <div className={`expandable-list-item${item.selected && ' expandable-list-item__selected' || ''}`}>
@@ -37,6 +39,7 @@ export default class ExpandableListItem extends ExtendedListItem<IExpandableList
                 {   
                     state.expanded && <div className="expandable-list-item_body">{item.body}</div>
                 }
+                {footer}
             </div>
         );
     }
