@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Subject } from 'rxjs';
+import { Stream } from 'stream';
 
 export interface IBaseComponentProps{
     hidden?: boolean;
@@ -19,11 +20,14 @@ export default class BaseComponent<P extends IBaseComponentProps, S extends IBas
     extends React.Component<P, S> 
     implements React.Component<P, S>, IBaseComponent{
 
-    stream: Subject<any>;
+    _stream: Subject<any>;
+
+    get stream(): Subject<any> { return this._stream }
+    set stream(val: Subject<any>){ this._stream.next(val) }
 
     constructor(props: P){
         super(props);
-        this.stream = this.props.stream;
+        this._stream = this.props.stream;
     }
 
     componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {

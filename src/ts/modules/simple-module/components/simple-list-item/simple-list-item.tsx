@@ -11,7 +11,7 @@ interface ISimpleListItemProps<T> extends IBaseComponentProps{
 
 interface ISimpleListItemState { }
 
-export default class SimpleListItem<P, S, T> extends BaseComponent<ISimpleListItemProps<T> & P, ISimpleListItemState & S>{
+export default class SimpleListItem<P, S, T> extends BaseComponent<ISimpleListItemProps<T> & P, ISimpleListItemState | S>{
     constructor(props) {
         super(props);
     }

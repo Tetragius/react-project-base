@@ -13,12 +13,16 @@ interface IExtendedListItemState {
     selected?: boolean;
 }
 
-export default class ExtendedListItem<P, S, T> extends SimpleListItem<IExtendedListItemProps & P, IExtendedListItemState & S, IExtendedItem & T>{
+export default class ExtendedListItem<P, S, T> extends SimpleListItem<IExtendedListItemProps & P, IExtendedListItemState | S, IExtendedItem & T>{
+    
     constructor(props) {
         super(props);
     }
 
+    state = { selected: this.props.selected || false }
+
     onSelect(id: string){
+        this.setState({ selected: !this.state.selected })
         this.props.onSelect && this.props.onSelect(id);
     }
 
@@ -29,10 +33,11 @@ export default class ExtendedListItem<P, S, T> extends SimpleListItem<IExtendedL
     view() {
 
         const props = this.props;
+        const state = this.state;
         const item = props.item;
 
         return( 
-        <div className={`extended-list-item${item.selected && ' extended-list-item__selected' || ''}`}>
+        <div className={`extended-list-item${state.selected && ' extended-list-item__selected' || ''}`}>
             <div className="extended-list-item_select" onClick={() => this.onSelect(item.id)}></div>
             <>
                 {super.view()}

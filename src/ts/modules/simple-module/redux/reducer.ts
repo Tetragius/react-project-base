@@ -11,6 +11,7 @@ const initialState: IState = {
             { id: "1", title: "test 1", type: ItemType.simple },
             { id: "2", title: "test 2", type: ItemType.extended },
             { id: "3", title: "test 3", type: ItemType.expandable, body: 'test test tset test test test test' },
+            { id: "5", title: "test 5", type: ItemType.simple },
             { id: "4", title: "test 4", type: ItemType.extendedExpandable, body: 'test test test test test test test test test test', footer: 'test test test test test test test test test test' },
         ], 
         total: 2}
