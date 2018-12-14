@@ -20,7 +20,7 @@ class CenterContainer extends BaseContainer<ICenterContainerProps, ICenterContai
 
         return (
             <div className="center-container" >
-                {modules.map( _module => <Route key={_module.name} path={`/${_module.name}` } component={_module.component}/> )}
+                {modules.map( _module => <Route key={_module.manifest.id} path={`/${_module.manifest.name}` } component={_module.component}/> )}
             </div>
             );
         }

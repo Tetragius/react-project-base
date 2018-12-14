@@ -3,31 +3,30 @@ import './style.scss';
 import SimpleListItem from '../simple-list-item';
 import IExtendedItem from '../../interfaces/IExtendedItem';
 
-interface IExtendedListItemProps { 
-    selected?: boolean;
-    onSelect?: (id: string) => void;
-    onRemove?: (id: string) => void;
+interface IExtendedListItemProps<T> {
+    onSelect?: (item: IExtendedItem & T) => void;
+    onRemove?: (item: IExtendedItem & T) => void;
 }
 
-interface IExtendedListItemState { 
+interface IExtendedListItemState {
     selected?: boolean;
 }
 
-export default class ExtendedListItem<P, S, T> extends SimpleListItem<IExtendedListItemProps & P, IExtendedListItemState | S, IExtendedItem & T>{
-    
+export default class ExtendedListItem<P, S, T> extends SimpleListItem<IExtendedListItemProps<T> & P, IExtendedListItemState | S, IExtendedItem & T>{
+
     constructor(props) {
         super(props);
     }
 
-    state = { selected: this.props.selected || false }
+    state = { selected: this.props.item.selected || false }
 
-    onSelect(id: string){
+    onSelect(item: IExtendedItem & T) {
         this.setState({ selected: !this.state.selected })
-        this.props.onSelect && this.props.onSelect(id);
+        this.props.onSelect && this.props.onSelect(item);
     }
 
-    onRemove(id: string) {
-        this.props.onRemove && this.props.onRemove(id);
+    onRemove(item: IExtendedItem & T) {
+        this.props.onRemove && this.props.onRemove(item);
     }
 
     view() {
@@ -36,14 +35,14 @@ export default class ExtendedListItem<P, S, T> extends SimpleListItem<IExtendedL
         const state = this.state;
         const item = props.item;
 
-        return( 
-        <div className={`extended-list-item${state.selected && ' extended-list-item__selected' || ''}`}>
-            <div className="extended-list-item_select" onClick={() => this.onSelect(item.id)}></div>
-            <>
-                {super.view()}
-            </>
-            <div className="extended-list-item_remove" onClick={() => this.onRemove(item.id)}></div>
-        </div>
+        return (
+            <div className={`extended-list-item${state.selected && ' extended-list-item__selected' || ''}`}>
+                <div className="extended-list-item_select" onClick={() => this.onSelect(item)}></div>
+                <>
+                    {super.view()}
+                </>
+                <div className="extended-list-item_remove" onClick={() => this.onRemove(item)}></div>
+            </div>
         );
     }
 }

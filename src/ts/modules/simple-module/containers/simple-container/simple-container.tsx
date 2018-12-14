@@ -3,14 +3,14 @@ import BaseContainer from '../../../../containers';
 import { withRouter } from 'react-router';
 import FormContainer from '../form-container';
 import './style.scss';
-import { ErrorComponent } from '../../../../components';
 import { connect } from 'react-redux';
 import IList from '../../interfaces/IList';
 import ListContainer from '../list-container';
+import manifest from '../../manifest';
 
 interface ISimpleContainerProps {
     list: IList;
- }
+}
 
 interface ISimpleContainerState { }
 
@@ -27,14 +27,17 @@ class SimpleContainer extends BaseContainer<ISimpleContainerProps, ISimpleContai
         return (
             <div className="simple-container" >
                 <FormContainer>
-                    <ListContainer list={props.list}/>
+                    <ListContainer list={props.list} />
                 </FormContainer>
-                {/* <FormContainer>
-                    <ErrorComponent />
-                </FormContainer> */}
             </div>
         );
     }
 }
 
-export default connect((state) => ({list: state['simple-module'].list}))(withRouter(SimpleContainer));
+const mapper = (state: any): ISimpleContainerProps => {
+    return {
+        list: state[manifest.name].list
+    }
+}
+
+export default connect(mapper)(withRouter(SimpleContainer));

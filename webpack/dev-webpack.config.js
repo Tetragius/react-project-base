@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = (root) => ({
     mode: "development",
     devtool: "source-map",
-    entry: "./src/ts/main.tsx",
+    entry: ["babel-polyfill", "./src/ts/main.tsx"],
     resolve: {
         extensions: [".ts", ".tsx", ".js"]
     },

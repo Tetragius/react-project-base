@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = root => ({
     mode: "production",
     entry: {
-        app: "./src/ts/main.tsx",
+        app: ["babel-polyfill", "./src/ts/main.tsx"],
         vendors: [
             'react',
             'react-dom',
@@ -31,8 +31,8 @@ module.exports = root => ({
         chunkFilename: '[id].[chunkhash].js',
         publicPath: '/'
     },
-    optimization:{
-        splitChunks:{
+    optimization: {
+        splitChunks: {
             cacheGroups: {
                 vendor: {
                     test: /node_modules/,

@@ -4,9 +4,9 @@ import './style.scss';
 import IItem from '../../interfaces/IItem';
 import { IBaseComponentProps } from '../../../../components/base-component';
 
-interface ISimpleListItemProps<T> extends IBaseComponentProps{ 
+interface ISimpleListItemProps<T> extends IBaseComponentProps {
     item: IItem & T;
-    onClick?: (id: string) => void;
+    onClick?: (item: IItem & T) => void;
 }
 
 interface ISimpleListItemState { }
@@ -16,8 +16,8 @@ export default class SimpleListItem<P, S, T> extends BaseComponent<ISimpleListIt
         super(props);
     }
 
-    onClick(id: string){
-        this.props.onClick && this.props.onClick(id)
+    onClick(item: IItem & T) {
+        this.props.onClick && this.props.onClick(item)
     }
 
     view() {
@@ -25,7 +25,7 @@ export default class SimpleListItem<P, S, T> extends BaseComponent<ISimpleListIt
         const item = this.props.item;
 
         return (
-            <div className="simple-list-item" onClick={() => this.onClick(item.id)}>{item.title}</div>
+            <div className="simple-list-item" onClick={() => this.onClick(item)}>{item.title}</div>
         );
     }
 }

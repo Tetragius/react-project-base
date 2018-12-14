@@ -1,4 +1,3 @@
-export default interface IList{
+export default interface IList {
     items: any[];
-    total: number;
 }

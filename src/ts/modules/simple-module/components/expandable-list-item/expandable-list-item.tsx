@@ -3,16 +3,16 @@ import './style.scss';
 import IExpandableItem from '../../interfaces/IExpandableItem';
 import ExtendedListItem from '../extended-list-item';
 
-interface IExpandableListItemProps { 
+interface IExpandableListItemProps<T> { 
     expanded?: boolean;
-    onExpand?: (id: string) => void;
+    onExpand?: (item: IExpandableItem & T) => void;
 }
 
 interface IExpandableListItemState { 
     expanded?: boolean;
 }
 
-export default class ExpandableListItem<P, S, T> extends ExtendedListItem<IExpandableListItemProps & P, IExpandableListItemState | S, IExpandableItem & T>{
+export default class ExpandableListItem<P, S, T> extends ExtendedListItem<IExpandableListItemProps<T> & P, IExpandableListItemState | S, IExpandableItem & T>{
     constructor(props) {
         super(props);
         this.stream
@@ -21,14 +21,14 @@ export default class ExpandableListItem<P, S, T> extends ExtendedListItem<IExpan
 
     state = { 
         expanded: this.props.expanded || false, 
-        selected: this.props.selected || false 
+        selected: this.props.item.selected || false 
     }
 
     toggle = () => this.setState({ expanded: !this.state.expanded });
 
-    onClick(id: string){
+    onClick(item: IExpandableItem & T){
         this.toggle()
-        this.stream.next(id);
+        this.stream.next(item);
     }
 
     view(footer?: JSX.Element) {

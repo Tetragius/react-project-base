@@ -1,10 +1,7 @@
 import * as React from 'react';
 import SimpeContainer from './containers/simple-container';
 
-export { default as reducer } from './redux/reducer';
-export { default as StoreService } from "./services/store-service";
-
-export class Main extends React.Component {
+export class main extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -15,3 +12,7 @@ export class Main extends React.Component {
         )
     }
 }
+
+export { default as reducer } from './redux/reducer';
+export { default as StoreService } from "./services/store-service";
+export { default as manifest } from "./manifest";
