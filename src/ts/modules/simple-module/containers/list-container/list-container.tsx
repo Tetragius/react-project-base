@@ -3,10 +3,8 @@ import BaseContainer from '../../../../containers';
 import { withRouter } from 'react-router';
 import './style.scss';
 import IList from '../../interfaces/IList';
-import ListService from './list-service'
 import { ComponentClass } from 'enzyme';
-import listService from './list-service';
-import Actions from '../../redux/actions';
+import ListServiceStatic, { ListService } from './list-service';
 import { IBaseContainerState } from '../../../../containers/base-container';
 
 interface IListContainerProps {
@@ -14,63 +12,72 @@ interface IListContainerProps {
 }
 
 interface IListContainerState extends IBaseContainerState {
-    items: any;
+    items?: any;
 }
 
-class ListContainer extends BaseContainer<IListContainerProps, IListContainerState>{
+export class ListContainer<P, S> extends BaseContainer<IListContainerProps & P, IListContainerState | S>{
 
     state = { items: this.props.list.items };
 
-    constructor(props) {
+    listService: ListService = null;
+
+    constructor(props, selfListService = false) {
         super(props, true);
-        listService.stateProvider = () => this.state;
+        if (selfListService) {
+            this.listService = new ListService();
+        }
+        else {
+            this.listService = ListServiceStatic;
+        }
+        this.listService.stateProvider = () => this.state;
     }
 
     selectItemHandler = (item: any) =>
-        // listService.selectItem(item)
-        //     .then(list => this.setState({ items: list.items }));
-        Actions.selectItem(item);
-
+        this.listService.selectItem(item)
+            .then(list => this.setState({ items: list.items }));
 
     removeItemHandler = (item: any) =>
-        // listService.removeItem(item)
-        //     .then(list => this.setState({ items: list.items }));
-        Actions.removeItem(item);
+        this.listService.removeItem(item)
+            .then(list => this.setState({ items: list.items }));
 
     clickItemHandler = (item: any) => console.log(item);
 
     sort = (flag?: boolean) =>
-        // listService.sort(flag)
-        //     .then(list => this.setState({ items: list.items }));
-        Actions.sortList(flag);
+        this.listService.sort(flag)
+            .then(list => this.setState({ items: list.items }));
 
+    defineItemProps(item) {
+        return {
+            key: item.id,
+            item: item,
+            onClick: this.clickItemHandler,
+            onRemove: this.removeItemHandler,
+            onSelect: this.selectItemHandler,
+            stream: this.stream,
+        }
+    }
 
-    componentWillReceiveProps(nextProps: IListContainerProps) {
-        this.setState({ items: nextProps.list.items });
+    defineItem = (item) => {
+        const itemFactory = this.listService.itemFactory;
+        const Component = itemFactory(item) as ComponentClass<any>;
+        const props = this.defineItemProps(item);
+        return (
+            <Component
+                {...props}
+            />)
     }
 
     view() {
 
         const items = this.state.items;
-        const itemFactory = ListService.itemFactory;
-
-        const defineItem = (item) => {
-            const Component = itemFactory(item) as ComponentClass<any>;
-            return (
-                <Component
-                    key={item.id}
-                    item={item}
-                    onClick={this.clickItemHandler}
-                    onRemove={this.removeItemHandler}
-                    onSelect={this.selectItemHandler}
-                    stream={this.stream} />)
-        }
 
         return (
             <div className="list-container" >
-                <div onClick={() => this.sort()}>asc</div>
-                <div onClick={() => this.sort(false)}>desc</div>
-                {items.map(item => defineItem(item))}
+                <div className="sort">
+                    <div onClick={() => this.sort()}>asc</div>
+                    <div onClick={() => this.sort(false)}>desc</div>
+                </div>
+                {items.map(item => this.defineItem(item))}
             </div>
         );
     }

@@ -6,8 +6,9 @@ import ExtendedExpandableListItem from '../../components/extended-expandable-lis
 import IExtendedItem from '../../interfaces/IExtendedItem';
 import getModuleStateUnsafe from '../../redux/store';
 import IList from '../../interfaces/IList';
+import ValidationListItem from '../../components/validation-list-item';
 
-class ListService {
+export class ListService {
 
     public get listStoreUnsafe() { return getModuleStateUnsafe().list; }
 
@@ -20,6 +21,7 @@ class ListService {
             case ItemType.extended: return ExtendedListItem;
             case ItemType.expandable: return ExpandableListItem;
             case ItemType.extendedExpandable: return ExtendedExpandableListItem;
+            case ItemType.validate: return ValidationListItem;
             default: return SimpleListItem;
         }
     }
@@ -33,10 +35,6 @@ class ListService {
             items.sort((a, b) => b.id - a.id);
         }
         return { items };
-    }
-
-    public async filterByType(itemType: string): Promise<IList> {
-        return { ...this.state };
     }
 
     public async removeItem(item: IItem): Promise<IList> {

@@ -1,11 +1,12 @@
-export enum ItemType{
+export enum ItemType {
     simple,
     extended,
     expandable,
-    extendedExpandable
+    extendedExpandable,
+    validate
 }
 
-export default interface IItem{
+export default interface IItem {
     id: string;
     type: ItemType;
     title: string;

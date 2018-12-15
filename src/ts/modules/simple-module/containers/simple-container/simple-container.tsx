@@ -6,10 +6,12 @@ import './style.scss';
 import { connect } from 'react-redux';
 import IList from '../../interfaces/IList';
 import ListContainer from '../list-container';
+import ListBContainer from '../list-b-container';
 import manifest from '../../manifest';
 
 interface ISimpleContainerProps {
     list: IList;
+    listB: IList;
 }
 
 interface ISimpleContainerState { }
@@ -28,6 +30,7 @@ class SimpleContainer extends BaseContainer<ISimpleContainerProps, ISimpleContai
             <div className="simple-container" >
                 <FormContainer>
                     <ListContainer list={props.list} />
+                    <ListBContainer list={props.listB} />
                 </FormContainer>
             </div>
         );
@@ -36,7 +39,8 @@ class SimpleContainer extends BaseContainer<ISimpleContainerProps, ISimpleContai
 
 const mapper = (state: any): ISimpleContainerProps => {
     return {
-        list: state[manifest.name].list
+        list: state[manifest.name].list,
+        listB: state[manifest.name].listB,
     }
 }
 

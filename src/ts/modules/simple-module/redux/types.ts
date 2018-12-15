@@ -2,10 +2,10 @@ import { createAction } from 'redux-actions';
 import IList from '../interfaces/IList';
 
 class ActionTypes {
-    static setList = createAction<IList>(`SET_LIST`);
-    static removeItem = createAction<any>(`REMOVE_ITEM`);
-    static selectItem = createAction<any>(`SELECT_ITEM`);
-    static sortList = createAction<boolean>(`SORT_LIST`);
+    static setListB = createAction<IList>(`SET_LIST_B`);
+    static removeItemFromListB = createAction<any>(`REMOVE_ITEM_FROM_LIST_B`);
+    static selectItemFromListB = createAction<any>(`SELECT_ITEM_FROM_LIST_B`);
+    static sortListB = createAction<boolean>(`SORT_LIST_B`);
 }
 
 export default ActionTypes;

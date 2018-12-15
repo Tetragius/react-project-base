@@ -1,0 +1,12 @@
+.input{
+    outline: none;
+    border: 1px solid gray;
+    transition: all .2s;
+    width: 100%;
+    height: 14pt;
+    font-size: 14pt;
+}
+
+.invalid{
+    border: 1px solid red;
+}
