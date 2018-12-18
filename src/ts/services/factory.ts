@@ -8,23 +8,23 @@ import { connect } from 'react-redux';
 import { injectAsyncReducer } from '../redux/store';
 import { actionList } from '../components/factory-component/factory-component-a';
 
-interface IFactoryResult {
-    component: React.ComponentClass;
-    actionList: any;
+interface IFactoryResult<P, S, A> {
+    component: React.ComponentClass<P, S>;
+    actionList: A;
 }
 
 export default class Factory {
     static store: Store;
 
-    public static connect = (component, propsMapper, actions, initialState, prefix = (new Guid().toString())): IFactoryResult => {
+    public static connect = <CProps = any, CState = any, RState = any, A = any>(component, propsMapper, actions, initialState, prefix = (new Guid().toString())): IFactoryResult<CProps, CState, A> => {
         const { _actions, actionTypes } = Factory.buildActions(actions, prefix, initialState);
         return {
-            component: connect(state => Factory.mapper(propsMapper(state[prefix]), _actions))(
-                class extends React.Component {
+            component: connect<RState, null, CProps, CState >(state => Factory.mapper(propsMapper(state[prefix]), _actions))(
+                class <CProps, CState> extends React.Component<CProps, CState> {
                     constructor(props) { super(props) }
-                    render() { return React.cloneElement(component, { ...this.props }, this.props.children) }
+                    render() { return React.cloneElement(component, { ...this.props as any }, this.props.children) }
                 }),
-            actionList: actionTypes
+            actionList: actionTypes as A
         }
     }
 

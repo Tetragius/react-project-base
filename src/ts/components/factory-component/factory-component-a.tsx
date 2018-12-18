@@ -1,6 +1,16 @@
 import Factory from "../../services/factory";
 import * as React from 'react';
-import Example from "./example";
+import Example, { IExampleProps, IExampleState } from "./example";
+import { AnyAction } from "redux";
+
+interface IState {
+    value: string;
+}
+
+interface IActions {
+    action_one(): AnyAction;
+    action_two(value: string): AnyAction;
+}
 
 const initialState = {
     value: 'test'
@@ -21,7 +31,7 @@ const actions = {
     },
 }
 
-export const { component, actionList } = Factory.connect(
+export const { component, actionList } = Factory.connect<IExampleProps, IExampleState, IState, IActions>(
     <Example />,
     mapStateToProps,
     actions,
