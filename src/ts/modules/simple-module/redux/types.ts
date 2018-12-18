@@ -6,6 +6,7 @@ class ActionTypes {
     static removeItemFromListB = createAction<any>(`REMOVE_ITEM_FROM_LIST_B`);
     static selectItemFromListB = createAction<any>(`SELECT_ITEM_FROM_LIST_B`);
     static sortListB = createAction<boolean>(`SORT_LIST_B`);
+    static toggleLoading = createAction<boolean>('TOGGLE_LOADING');
 }
 
 export default ActionTypes;

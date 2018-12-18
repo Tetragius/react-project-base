@@ -8,15 +8,16 @@ import { hot } from 'react-hot-loader';
 import ModuleService from './services/module-service';
 import modules from './modules';
 import '../styles/main.scss';
+import Factory from './services/factory';
 
 ModuleService.loadModules(modules);
 
-class Application extends React.Component{
-    constructor(props){
+class Application extends React.Component {
+    constructor(props) {
         super(props);
     }
 
-    render(){
+    render() {
         return (
             <Provider store={store}>
                 <Router history={history}>
@@ -27,6 +28,8 @@ class Application extends React.Component{
     }
 }
 
-const HotApplication= hot(module)(Application);
+Factory.store = store;
+
+const HotApplication = hot(module)(Application);
 
 ReactDOM.render(<HotApplication />, document.getElementById('app'));

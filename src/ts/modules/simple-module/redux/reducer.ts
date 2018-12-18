@@ -25,27 +25,30 @@ const initialState: IState = {
         items: _.cloneDeep(items)
     },
     listB: {
-        items: _.cloneDeep(items)
-    }
+        items: _.cloneDeep(items),
+        filter: 0,
+        asc: true,
+    },
+    loading: false,
 };
 
-const reducer = handleActions<any, any>(
+const reducer = handleActions<IState, any>(
     {
-        [ActionTypes.setListB(null).type]: (state: IState, action: Action<IList>): any => {
+        [ActionTypes.setListB(null).type]: (state: IState, action: Action<any[]>): IState => {
             const result = { ...state };
-            _.assign(result, { listB: action.payload });
+            _.assign(result, { listB: { ...state.listB, items: [...state.listB.items, ...action.payload] } });
             return result;
         },
 
-        [ActionTypes.removeItemFromListB(null).type]: (state: IState, action: Action<IExtendedItem>): any => {
+        [ActionTypes.removeItemFromListB(null).type]: (state: IState, action: Action<IExtendedItem>): IState => {
             const result = { ...state };
             const items = result.listB.items;
             const index = items.indexOf(action.payload);
             items.splice(index, 1);
-            return _.assign(result, { listB: { items: [...items] } });;
+            return _.assign(result, { listB: { ...state.listB, items: [...items] } });;
         },
 
-        [ActionTypes.selectItemFromListB(null).type]: (state: IState, action: Action<IExtendedItem>): any => {
+        [ActionTypes.selectItemFromListB(null).type]: (state: IState, action: Action<IExtendedItem>): IState => {
             const result = { ...state };
             const items = result.listB.items;
             const index = items.indexOf(action.payload);
@@ -53,7 +56,7 @@ const reducer = handleActions<any, any>(
             return result;
         },
 
-        [ActionTypes.sortListB(null).type]: (state: IState, action: Action<boolean>): any => {
+        [ActionTypes.sortListB(null).type]: (state: IState, action: Action<boolean>): IState => {
             const result = { ...state };
             const items = result.listB.items;
             if (action.payload) {
@@ -62,7 +65,13 @@ const reducer = handleActions<any, any>(
             else {
                 items.sort((a, b) => b.id - a.id);
             }
-            return _.assign(result, { listB: { items: [...items] } });
+            return _.assign(result, { listB: { items: [...items], asc: action.payload } });
+        },
+
+        [ActionTypes.toggleLoading(null).type]: (state: IState, action: Action<boolean>): IState => {
+            const result = { ...state };
+            result.loading = action.payload;
+            return result;
         }
     },
     initialState,

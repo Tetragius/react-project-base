@@ -67,17 +67,22 @@ export class ListContainer<P, S> extends BaseContainer<IListContainerProps & P, 
             />)
     }
 
-    view() {
+    view(custom = null) {
 
         const items = this.state.items;
 
         return (
-            <div className="list-container" >
+            <div className="list-container">
                 <div className="sort">
-                    <div onClick={() => this.sort()}>asc</div>
+                    <div onClick={() => this.sort(true)}>asc</div>
                     <div onClick={() => this.sort(false)}>desc</div>
+                    {custom}
                 </div>
-                {items.map(item => this.defineItem(item))}
+                <div className="list-wrapper">
+                    <div className="list" >
+                        {items.map(item => this.defineItem(item))}
+                    </div>
+                </div>
             </div>
         );
     }

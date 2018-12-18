@@ -35,7 +35,6 @@ class ListBContainer extends ListContainer<IListContainerProps, IListContainerSt
     sort = (flag?: boolean) => Actions.sortList(flag);
 
     itemChanged = (item) => {
-        console.log(item);
         const count = this.itemsRefs.filter(r => r && r.state && typeof r.state.isValid === 'boolean' && !r.state.isValid).length;
         this.setState({ invalidCount: count });
         // тут можно считать как угодно, 
@@ -60,10 +59,14 @@ class ListBContainer extends ListContainer<IListContainerProps, IListContainerSt
         this.setState({ items: nextProps.list.items });
     }
 
+    loadList = () =>
+        Actions.loadList(this.state.items.length + 1, 10);
+
     view() {
+        const custom = <div onClick={() => this.loadList()}>load</div>
         return <>
             invalidCount={this.state.invalidCount}
-            {super.view()}
+            {super.view(custom)}
         </>
     }
 }

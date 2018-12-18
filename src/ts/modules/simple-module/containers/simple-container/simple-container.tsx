@@ -12,6 +12,7 @@ import manifest from '../../manifest';
 interface ISimpleContainerProps {
     list: IList;
     listB: IList;
+    loading: boolean;
 }
 
 interface ISimpleContainerState { }
@@ -28,9 +29,12 @@ class SimpleContainer extends BaseContainer<ISimpleContainerProps, ISimpleContai
 
         return (
             <div className="simple-container" >
-                <FormContainer>
+                <FormContainer hidden={props.loading}>
                     <ListContainer list={props.list} />
                     <ListBContainer list={props.listB} />
+                </FormContainer>
+                <FormContainer hidden={!props.loading}>
+                    <div className="loader">Loading...</div>
                 </FormContainer>
             </div>
         );
@@ -41,6 +45,7 @@ const mapper = (state: any): ISimpleContainerProps => {
     return {
         list: state[manifest.name].list,
         listB: state[manifest.name].listB,
+        loading: state[manifest.name].loading
     }
 }
 
