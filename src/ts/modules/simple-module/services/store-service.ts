@@ -1,4 +1,4 @@
-import manifest from "../manifest";
+import manifest from "../../simple-module/manifest";
 import IState from "../interfaces/IState";
 
 export default class StoreService {

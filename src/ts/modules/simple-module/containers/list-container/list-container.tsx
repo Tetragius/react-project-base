@@ -1,11 +1,11 @@
 import * as React from 'react';
 import BaseContainer from '../../../../containers';
-import { withRouter } from 'react-router';
 import './style.scss';
 import IList from '../../interfaces/IList';
 import { ComponentClass } from 'enzyme';
 import ListServiceStatic, { ListService } from './list-service';
 import { IBaseContainerState } from '../../../../containers/base-container';
+import { withRouter } from 'react-router';
 
 interface IListContainerProps {
     list: IList;

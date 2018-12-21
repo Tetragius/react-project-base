@@ -8,7 +8,6 @@ import { hot } from 'react-hot-loader';
 import ModuleService from './services/module-service';
 import modules from './modules';
 import '../styles/main.scss';
-import Factory from './services/factory';
 
 ModuleService.loadModules(modules);
 
@@ -27,8 +26,6 @@ class Application extends React.Component {
         )
     }
 }
-
-Factory.store = store;
 
 const HotApplication = hot(module)(Application);
 
