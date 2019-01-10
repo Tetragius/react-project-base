@@ -1,6 +1,6 @@
 import * as React from 'react';
 import BaseContainer from '../../../../containers';
-////import './style.scss';
+//import './style.scss';
 import IList from '../../interfaces/IList';
 import { ComponentClass } from 'enzyme';
 import ListServiceStatic, { ListService } from './list-service';

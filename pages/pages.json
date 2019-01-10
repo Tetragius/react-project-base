@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "name": "external-module",
+        "version": "1.0.0"
+    },
+    {
+        "id": 2,
+        "name": "external-module-error",
+        "version": "1.0.0"
+    },
+    {
+        "id": 4,
+        "name": "sme",
+        "version": "1.0.0"
+    }
+]

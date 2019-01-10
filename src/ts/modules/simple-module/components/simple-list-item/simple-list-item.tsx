@@ -1,6 +1,6 @@
 import * as React from 'react';
 import BaseComponent from '../../../../components';
-////import './style.scss';
+//import './style.scss';
 import IItem from '../../interfaces/IItem';
 import { IBaseComponentProps } from '../../../../components/base-component';
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-////import './style.scss';
+//import './style.scss';
 import IExpandableItem from '../../interfaces/IExpandableItem';
 import ExtendedListItem from '../extended-list-item';
 
