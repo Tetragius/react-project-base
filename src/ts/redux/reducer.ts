@@ -7,7 +7,8 @@ const initialState: any = {
     loading: false,
     modules: [
         ...ExtModuleService.preparePageStore(),
-        { id: 3, name: "simple-module", internal: true }
+        { id: 3, name: "simple-module", internal: true },
+        { id: 5, name: "example-module", internal: true }
     ]
 };
 

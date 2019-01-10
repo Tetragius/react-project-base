@@ -2,6 +2,7 @@ import * as React from 'react';
 import BaseComponent, { IBaseComponentProps, IBaseComponentState } from '../../components/base-component';
 import { ModuleService } from '../../services/module-service';
 import { ExtModuleService } from '../../services/external-module-service';
+import './style.scss';
 
 export interface IModuleContainerProps extends IBaseComponentProps {
     moduleName?: any;
