@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ExpandableListItem from '../expandable-list-item';
 import IExtendedExpandableItem from '../../interfaces/IExtendedExpandableItem';
-//import './style.scss';
+import './style.scss';
 
 interface IExtendedExpandableListItemProps { }
 

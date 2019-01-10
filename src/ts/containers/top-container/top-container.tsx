@@ -1,7 +1,7 @@
 import * as React from 'react';
 import BaseContainer from '../base-container';
 import { withRouter } from 'react-router';
-//import './style.scss';
+import './style.scss';
 import { history } from '../../redux/store';
 import { connect } from 'react-redux';
 

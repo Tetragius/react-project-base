@@ -2,7 +2,7 @@ import * as React from 'react';
 import BaseContainer from '../base-container';
 import { withRouter, Route } from 'react-router';
 import ExampleContainer from '../example-container/example-container';
-//import './style.scss';
+import './style.scss';
 import ModuleContainer from '../module-container';
 import { connect } from 'react-redux';
 
