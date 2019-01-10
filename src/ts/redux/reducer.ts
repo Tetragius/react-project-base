@@ -1,10 +1,16 @@
 import { handleActions } from 'redux-actions';
 import ActionTypes from './types';
 import * as _ from 'lodash';
+import { ExtModuleService } from '../services/external-module-service';
 
 const initialState: any = {
-    loading: false
+    loading: false,
+    modules: [
+        ...ExtModuleService.preparePageStore(),
+        { id: 3, name: "simple-module", internal: true }
+    ]
 };
+
 
 const reducer = handleActions<any, any>(
     {

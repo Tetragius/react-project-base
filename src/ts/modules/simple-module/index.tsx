@@ -2,9 +2,6 @@ import * as React from 'react';
 import SimpeContainer from './containers/simple-container';
 
 export class main extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (

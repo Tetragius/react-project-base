@@ -6,7 +6,7 @@ export interface IBaseComponentProps {
     stream?: Subject<any>;
 }
 
-export interface IBaswComponentState {
+export interface IBaseComponentState {
     _error?: boolean;
 }
 
@@ -17,7 +17,7 @@ export interface IBaseComponent<T> {
 }
 
 
-export default class BaseComponent<P extends IBaseComponentProps, S extends IBaswComponentState, V = any>
+export default class BaseComponent<P extends IBaseComponentProps, S extends IBaseComponentState, V = any>
     extends React.Component<P, S>
     implements React.Component<P, S>, IBaseComponent<V>{
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import BaseContainer from '../base-container';
 import { withRouter } from 'react-router';
 import { TopContainer, LeftContainer, CenterContainer } from '..';
-import "./style.scss";
+////import "./style.scss";
 
 interface IMainContainerProps {}
 

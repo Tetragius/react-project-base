@@ -1,4 +1,5 @@
 node_modules
 dist
+dist-module
 **/__snapshots__
 *.snap

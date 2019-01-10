@@ -5,6 +5,8 @@ export default class StoreService {
 
     public static _store;
 
+    public static _service;
+
     public static get store() { return StoreService._store; }
     public static get state(): IState { return StoreService.store.getState()[manifest.name]; }
 
@@ -14,6 +16,10 @@ export default class StoreService {
 
     public static setStore(store) {
         StoreService._store = store;
+    }
+
+    public static setService(service) {
+        StoreService._service = service;
     }
 
 }

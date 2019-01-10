@@ -1,11 +1,14 @@
 import * as React from 'react';
 import BaseContainer from '../base-container';
 import { withRouter, Route } from 'react-router';
-import ModuleService from '../../services/module-service';
 import ExampleContainer from '../example-container/example-container';
-import './style.scss';
+////import './style.scss';
+import ModuleContainer from '../module-container';
+import { connect } from 'react-redux';
 
-interface ICenterContainerProps { }
+interface ICenterContainerProps {
+    modules: any;
+}
 
 interface ICenterContainerState { }
 
@@ -15,17 +18,25 @@ class CenterContainer extends BaseContainer<ICenterContainerProps, ICenterContai
         super(props);
     }
 
-    view(children) {
+    view() {
 
-        const modules = ModuleService.modules;
+        const modules = this.props.modules;
 
         return (
             <div className="center-container" >
                 <Route exact path="/" component={ExampleContainer} />
-                {modules.map(_module => <Route key={_module.manifest.id} path={`/${_module.manifest.name}`} component={_module.component} />)}
+                {modules.map(m =>
+                    <Route
+                        key={m.id}
+                        path={`/${m.name}`}
+                        render={(props) => <ModuleContainer {...props} manifest={m} moduleName={m.name} internal={m.internal} />} />
+                )}
             </div>
         );
     }
 }
 
-export default withRouter(CenterContainer);
+export default withRouter(connect<any, any, any>((state: any) => (
+    {
+        modules: state.core.modules
+    }))(CenterContainer));
