@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import IList from '../../interfaces/IList';
 import Actions from '../../redux/actions';
 import { IBaseContainerState } from '../../../../containers/base-container';
-import { ListContainer } from '../list-container';
+import { ListContainer } from '../list-container/list-container';
 
 interface IListContainerProps {
     list: IList;
@@ -13,7 +13,7 @@ interface IListContainerState extends IBaseContainerState {
     invalidCount: number;
 }
 
-class ListBContainer extends ListContainer<IListContainerProps, IListContainerState>{
+export class ListBContainer extends ListContainer<IListContainerProps, IListContainerState>{
 
     constructor(props) {
         super(props);
@@ -37,12 +37,6 @@ class ListBContainer extends ListContainer<IListContainerProps, IListContainerSt
     itemChanged = (item) => {
         const count = this.itemsRefs.filter(r => r && r.state && typeof r.state.isValid === 'boolean' && !r.state.isValid).length;
         this.setState({ invalidCount: count });
-        // тут можно считать как угодно, 
-        // меняя основной стор экшенами, Actions.setItemValidation(item) если нужен доступ к валидации из других частей приложения
-        // заводить статическую переменную в сервисе ListService.localStore[item.id] = item; 
-        // если достаточно обработать на форме, так же если этот список часть составного стейта то можно прокинуть в родителя через событие
-        // this.props.onChangeListValid()
-        // в данном примере если необходимо можно собирать указатели на элементы
     }
 
     defineItemProps(item) {

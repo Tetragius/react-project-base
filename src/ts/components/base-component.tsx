@@ -1,31 +1,32 @@
 import * as React from 'react';
 import { Subject } from 'rxjs';
-import { Stream } from 'stream';
 
-export interface IBaseComponentProps{
+export interface IBaseComponentProps {
     hidden?: boolean;
     stream?: Subject<any>;
 }
 
-export interface IBaswComponentState{
+export interface IBaseComponentState {
     _error?: boolean;
 }
 
-export interface IBaseComponent{
-    view<T>(children?: React.ReactNode, template?: T): JSX.Element;
+export interface IBaseComponent<T> {
+    view(template?: T): JSX.Element;
+
+    errorView(): JSX.Element;
 }
 
 
-export default class BaseComponent<P extends IBaseComponentProps, S extends IBaswComponentState, V = any> 
-    extends React.Component<P, S> 
-    implements React.Component<P, S>, IBaseComponent{
+export default class BaseComponent<P extends IBaseComponentProps, S extends IBaseComponentState, V = any>
+    extends React.Component<P, S>
+    implements React.Component<P, S>, IBaseComponent<V>{
 
     _stream: Subject<any>;
 
     get stream(): Subject<any> { return this._stream }
-    set stream(val: Subject<any>){ this._stream.next(val) }
+    set stream(val: Subject<any>) { this._stream.next(val) }
 
-    constructor(props: P){
+    constructor(props: P) {
         super(props);
         this._stream = this.props.stream;
     }
@@ -34,21 +35,25 @@ export default class BaseComponent<P extends IBaseComponentProps, S extends IBas
         this.setState({ _error: true });
     }
 
-    view<V>(children: React.ReactNode, template?: V) : JSX.Element{
+    view(template?: V): JSX.Element {
         return null;
     }
 
-    render(){
+    errorView() {
+        return null;
+    }
+
+    render() {
 
         if (this.state && this.state._error) {
-            return <div>error</div>
+            return this.errorView();
         }
 
         const props = this.props;
-        if (!props.hidden){
-            return this.view(props.children)
+        if (!props.hidden) {
+            return this.view();
         }
-        else{
+        else {
             return null;
         }
     }

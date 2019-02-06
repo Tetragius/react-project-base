@@ -1,5 +1,6 @@
 import store, { injectAsyncReducer } from '../redux/store';
 import { ComponentClass, Reducer } from 'react';
+import { ExtModuleService } from './external-module-service';
 
 export interface IModuleManifest {
     id: string;
@@ -20,22 +21,39 @@ export interface IModule {
     component: ComponentClass;
 }
 
-export default class ModuleService {
+class $ModuleService {
 
-    private static _modules: IModule[] = <IModule[]>[];
+    _modules: {} = {};
 
-    public static get modules() { return ModuleService._modules };
+    _modulesList = [];
 
-    public static loadModules(modules: IModules) {
-        const modulesComponents = <IModule[]>[];
+    get modulesList() { return this._modulesList };
+
+    get modules() { return this._modules };
+
+    loadModules(modules: IModules) {
+        const _modules = {};
 
         for (let key in modules) {
             const _module = modules[key];
-            modulesComponents.push({ manifest: _module.manifest, component: _module.main });
+            _modules[key] = {
+                id: _module.manifest.id,
+                name: _module.manifest.name,
+                intenal: true,
+                component: _module.main
+            };
+            this._modulesList.push(_module.manifest);
             injectAsyncReducer(_module.manifest.name, _module.reducer);
             _module.StoreService.setStore(store);
+            _module.StoreService.setService(ExtModuleService.injectPortalService);
         }
 
-        ModuleService._modules = modulesComponents;
+        this._modules = _modules;
+    }
+
+    async getModuleElementInternal(name) {
+        return this._modules[name].component;
     }
 }
+
+export const ModuleService = new $ModuleService();

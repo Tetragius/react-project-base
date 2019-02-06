@@ -6,7 +6,6 @@ import { Store } from 'redux';
 import { connect } from 'react-redux';
 
 import { injectAsyncReducer } from '../redux/store';
-import { actionList } from '../components/factory-component/factory-component-a';
 
 interface IFactoryResult<P, S, A> {
     component: React.ComponentClass<P, S>;

@@ -5,10 +5,9 @@ import { Router } from 'react-router';
 import { Provider } from 'react-redux';
 import store, { history } from './redux/store';
 import { hot } from 'react-hot-loader';
-import ModuleService from './services/module-service';
-import modules from './modules';
 import '../styles/main.scss';
-import Factory from './services/factory';
+import { ModuleService } from './services/module-service';
+import modules from './modules';
 
 ModuleService.loadModules(modules);
 
@@ -27,8 +26,6 @@ class Application extends React.Component {
         )
     }
 }
-
-Factory.store = store;
 
 const HotApplication = hot(module)(Application);
 

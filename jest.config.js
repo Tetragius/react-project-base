@@ -14,6 +14,10 @@ module.exports = {
         "json",
         "node"
     ],
-    "snapshotSerializers": ["enzyme-to-json/serializer"],
+    "snapshotSerializers": ["enzyme-to-json/serializer", "jest-html"],
     "setupTestFrameworkScriptFile": "<rootDir>/setupEnzyme.ts",
+    "moduleNameMapper": {
+        "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
+        "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
+    }
 }

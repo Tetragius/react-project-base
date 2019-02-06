@@ -13,10 +13,10 @@ class FormContainer extends BaseContainer<IFormContainerProps, IFormContainerSta
         super(props);
     }
 
-    view(children) {
+    view() {
         return (
             <div className="form-container" >
-                {children}
+                {this.props.children}
             </div>
         );
     }

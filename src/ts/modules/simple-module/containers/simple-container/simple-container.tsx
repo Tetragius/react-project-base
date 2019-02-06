@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import IList from '../../interfaces/IList';
 import ListContainer from '../list-container';
 import ListBContainer from '../list-b-container';
-import manifest from '../../manifest';
+import manifest from '../../../simple-module/manifest';
 
 interface ISimpleContainerProps {
     list: IList;

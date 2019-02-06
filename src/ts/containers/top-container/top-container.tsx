@@ -2,10 +2,12 @@ import * as React from 'react';
 import BaseContainer from '../base-container';
 import { withRouter } from 'react-router';
 import './style.scss';
-import ModuleService from '../../services/module-service';
 import { history } from '../../redux/store';
+import { connect } from 'react-redux';
 
-interface ITopContainerProps { }
+interface ITopContainerProps {
+    modules: any;
+}
 
 interface ITopContainerState { }
 
@@ -18,12 +20,12 @@ class TopContainer extends BaseContainer<ITopContainerProps, ITopContainerState>
     goToModule = (name: string = "/") => history.push(name);
 
     defineLinks = (): JSX.Element[] => {
-        const modules = ModuleService.modules;
+        const modules = this.props.modules;
         return modules.map(m =>
             <div
                 className="link"
-                key={m.manifest.id}
-                onClick={() => this.goToModule(m.manifest.name)}>{m.manifest.name}
+                key={m.id}
+                onClick={() => this.goToModule(m.name)}>{m.name}
             </div>
         );
     }
@@ -40,4 +42,7 @@ class TopContainer extends BaseContainer<ITopContainerProps, ITopContainerState>
     }
 }
 
-export default withRouter(TopContainer);
+export default withRouter(connect<any, any, any>((state: any) => (
+    {
+        modules: state.core.modules
+    }))(TopContainer));

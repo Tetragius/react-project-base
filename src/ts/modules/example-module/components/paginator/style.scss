@@ -1,0 +1,29 @@
+.paginator {
+    display: flex;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    div{
+        padding: 4px;
+        border-top: 1px solid gray;
+        border-bottom: 1px solid gray;
+        border-right: 1px solid gray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all .2s;
+        background-color: azure;
+        min-width: 24px;
+        min-height: 24px;
+        &:hover{
+            background-color: beige;
+        }
+        &:first-child{
+            border-left: 1px solid gray;
+        }
+        &.cur{
+            background-color: beige;
+        }
+    }
+}
